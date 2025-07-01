@@ -1,7 +1,42 @@
 const express = require('express');
+const {authAdmin,authUser} = require('./middlewares/auth')
 const app = express();
 
-app.get('/user/:userid/:name', (req, res) => {
+app.use('/admin',authAdmin);
+
+app.get('/admin/getAllUsers', (req, res) => {
+  res.send('Fetched all the users');
+});
+
+app.get('/user/getUserData',authUser,(req,res,next)=>{
+  res.send("Feteched user Data");
+})
+
+app.get('/user/login',(req,res,next)=>{
+  console.log("User is trying to login...");
+  res.send("User logged in");
+})
+
+app.get('/admin/deleteUser', (req, res) => {
+  res.send('Deleted a User');
+});
+
+app.use((req, res, next) => {
+  console.log('Hey there ');
+  next();
+});
+
+app.get('/user2', (req, res, next) => {
+  res.send('Hello World');
+});
+
+app.get('/user', (req, res, next) => {
+  //console.log(req.params);
+  res.send('Got the user Data');
+  //next();
+});
+
+app.get('/user', (req, res) => {
   console.log(req.params);
   res.send('Got the user Data');
 });

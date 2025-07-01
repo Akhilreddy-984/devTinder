@@ -5,6 +5,7 @@ const app = express();
 app.use('/admin',authAdmin);
 
 app.get('/admin/getAllUsers', (req, res) => {
+  //throw new Error("error in fetching the data");
   res.send('Fetched all the users');
 });
 
@@ -54,6 +55,14 @@ app.delete('/user', (req, res) => {
 // app.use('/test', (req, res) => {
 //   res.send('Hello api!!');
 // });
+
+app.use('/',(err,req,res,next)=>{
+  if(err)
+  {
+    //Log your error
+    res.status(500).send("Something Went Wrong");
+  }
+})
 
 app.listen(7777, () => {
   console.log('Finally Server is successfully listening at port 7777');

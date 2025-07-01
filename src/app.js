@@ -1,17 +1,23 @@
 const express = require('express');
 const app = express();
 
-app.use('/api', (req, res) => {
-  res.send('Hello api!!');
+app.get('/user', (req, res) => {
+  res.send('Got the user Data');
 });
 
-app.use('/post', (req, res) => {
-  res.send('Hello Post!!');
+app.post('/user', (req, res) => {
+  //Save the user data into DB.
+  res.send('Successfully saved the user Data in DB.');
 });
 
-app.use('/', (req, res) => {
-  res.send('Hello World!!');
+app.delete('/user', (req, res) => {
+  //Delete the user from DB
+  res.send('Successfully Deleted the user from DB.');
 });
+
+// app.use('/test', (req, res) => {
+//   res.send('Hello api!!');
+// });
 
 app.listen(7777, () => {
   console.log('Finally Server is successfully listening at port 7777');

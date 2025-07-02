@@ -4,13 +4,18 @@ const connectToDb = require('./config/database')
 const User = require('./model/User');
 const app = express();
 
+
+app.use(express.json());
+
 app.post('/signup',async (req,res)=>{
-  const userObj = {
-    firstName: "Virat",
-    lastName: "Kohli",
-    email: "Virat.Kohil@gmail.com",
-    age: 38
-  }
+  const userObj = req.body;
+  console.log(userObj);
+  // const userObj = {
+  //   firstName: "Sachin",
+  //   lastName: "Tendulkar",
+  //   email: "Sachin.10@gmail.com",
+  //   age: 52
+  // }
   const user = new User(userObj);
 
   try{
